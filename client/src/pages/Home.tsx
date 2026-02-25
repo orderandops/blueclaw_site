@@ -46,12 +46,23 @@ export default function Home() {
   }, []);
 
   const handleSignUp = (e: React.FormEvent) => {
+    // If you want to use Formspree, you can change the form tag to:
+    // <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+    // and remove this onSubmit handler.
+    
     e.preventDefault();
     if (!email) return;
+    
     console.log("Sign up:", email);
+    
+    // For a real production app on Replit, you would typically:
+    // 1. Create a backend API endpoint (e.g., /api/waitlist)
+    // 2. Use fetch() or axios to send the email to that endpoint
+    // 3. Store it in a database (like Replit's Postgres)
+    
     toast({
       title: "Early access requested!",
-      description: "We'll be in touch soon with your discount code.",
+      description: "We've logged your interest (check the console!). In a full app, this would save to a database.",
     });
     setEmail("");
   };
