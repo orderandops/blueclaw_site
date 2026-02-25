@@ -1,0 +1,132 @@
+# Replit Prompt: Certified Payroll Landing Page
+
+Copy and paste everything below this line into Replit's AI assistant:
+
+---
+
+Create a modern, professional landing page for a SaaS product called "PayrollProof" (or suggest a better name) that helps construction subcontractors generate compliant certified payroll reports (WH-347 forms) for Davis-Bacon and prevailing wage projects.
+
+## Technical Requirements
+- Single HTML file with embedded CSS and JavaScript
+- Mobile-responsive design
+- Clean, modern aesthetic (think Stripe, Linear, or Vercel style)
+- Smooth scroll navigation
+- Email signup form that captures submissions (use Formspree, or just console.log for now)
+- No external dependencies except Google Fonts
+
+## Color Scheme
+- Primary: Deep blue (#1e3a5f) — conveys trust, compliance, professionalism
+- Accent: Bright teal or green (#10b981) — for CTAs and success states
+- Background: White and light gray (#f9fafb)
+- Text: Dark gray (#111827)
+
+## Page Structure
+
+### 1. Navigation Bar (sticky)
+- Logo/company name on left
+- Links: How It Works, Pricing, FAQ
+- CTA button: "Join Waitlist" on right
+
+### 2. Hero Section
+- Headline: "Stop struggling with certified payroll."
+- Subheadline: "Generate compliant WH-347 reports in minutes—not hours. No training required. No payroll system switch. Built by a former DOL investigator."
+- Email input field + "Join the Waitlist" button
+- Below form: "✓ No credit card required · ✓ 50% off for early access"
+- Optional: Simple illustration or icon representing compliance/documents
+
+### 3. Problem Section
+- Header: "Sound familiar?"
+- 5 pain points with X icons:
+  - "You won a prevailing wage job, but the paperwork is confusing"
+  - "The GC keeps asking where your certified payroll is"
+  - "You're not sure if you classified workers correctly"
+  - "Your payroll system doesn't create WH-347s"
+  - "You're worried about getting flagged in an audit"
+- Transition text: "You're not alone. Most subcontractors lose 3-5 hours per week on certified payroll—or worse, make mistakes that trigger penalties."
+
+### 4. Solution Section (How It Works)
+- Header: "There's a simpler way."
+- 3 steps with icons and brief descriptions:
+  1. "Upload your payroll" — "Export from QuickBooks, Gusto, or Excel. Drop it in."
+  2. "We map and validate" — "AI matches workers to correct classifications and flags issues."
+  3. "Download your WH-347" — "Compliant report ready to submit. Every week. In minutes."
+- Visual: Could be a simple 3-column layout or numbered steps
+
+### 5. Differentiation Section
+- Header: "Built different."
+- Comparison table or two-column layout:
+  | Other Tools | PayrollProof |
+  |-------------|--------------|
+  | Require you to switch payroll systems | Works with your existing payroll |
+  | Built for agencies and big GCs | Built for subcontractors like you |
+  | Weeks of training | No training—just upload and go |
+  | $200+/month subscriptions | One project, one price |
+  | Built by software people | Built by a former DOL investigator |
+
+### 6. Credibility Section
+- Header: "Why trust us?"
+- Founder quote in a styled blockquote:
+  "I spent years as a DOL investigator reviewing certified payrolls—and then years at a construction company filing them. I've seen every mistake that triggers audits. I built this because I know exactly what compliance looks like—and how hard it is without help."
+- Attribution: "— [Founder Name], Former DOL Wage & Hour Investigator"
+- Optional: Photo placeholder
+
+### 7. Features Section
+- Header: "What you get"
+- 6 features in a 2x3 or 3x2 grid with icons:
+  - "Wage determination lookup" — Auto-pull correct rates for your project
+  - "Smart classification matching" — Plain English → correct WD codes
+  - "Pre-submission validation" — Catch errors before they become penalties
+  - "Compliant WH-347 output" — Formatted exactly how agencies expect
+  - "State prevailing wage support" — CA, NY, and more coming soon
+  - "Audit-ready records" — Everything documented and exportable
+
+### 8. Pricing Section
+- Header: "Simple pricing. No subscriptions."
+- Single pricing card, centered:
+  - Price: "$79 per project"
+  - Features list:
+    - Unlimited certified payrolls for that project
+    - All workers, all weeks
+    - Wage determination lookup included
+    - Email support
+  - Badge: "Waitlist Special: 50% off your first project"
+  - CTA button: "Join the Waitlist"
+
+### 9. FAQ Section
+- Header: "Questions? We've got answers."
+- Accordion-style FAQ (click to expand) with these questions:
+  1. "Do I need to switch payroll systems?" — "No. Keep using QuickBooks, Gusto, ADP, or whatever you use. Export, upload, done."
+  2. "What if I don't know how to classify my workers?" — "Describe what they did in plain English. We match it to the correct wage determination classification and explain why."
+  3. "Is this for federal or state prevailing wage?" — "Federal Davis-Bacon at launch. State (California DIR, etc.) coming soon."
+  4. "How is this different from LCPtracker?" — "LCPtracker is for agencies and big GCs. We're for subs who just need to get the form right and submit it."
+  5. "How do you keep my data secure?" — "Bank-level encryption (AES-256). We only store last 4 digits of SSN—never the full number. Delete your data anytime."
+
+### 10. Final CTA Section
+- Header: "Ready to stop dreading certified payroll?"
+- Email input + button
+- Trust signals below: "✓ No credit card · ✓ 50% off early access · ✓ Unsubscribe anytime"
+
+### 11. Footer
+- Company name
+- Links: Privacy Policy, Terms of Service
+- Contact email
+- Copyright 2026
+
+## Form Handling
+For the email signup forms, either:
+1. Use Formspree (free tier): action="https://formspree.io/f/YOUR_ID"
+2. Or just log to console for now and I'll add real handling later
+
+## Additional Polish
+- Add subtle animations on scroll (fade in sections)
+- Hover effects on buttons and cards
+- Make the FAQ accordion functional with JavaScript
+- Add a subtle gradient or pattern to the hero background
+- Ensure all text is readable and well-spaced
+
+## Tone
+Professional but approachable. This is for blue-collar business owners who are frustrated and busy—not enterprise software buyers. Avoid jargon. Be direct.
+
+---
+
+Please generate the complete HTML file with all CSS and JavaScript embedded.
