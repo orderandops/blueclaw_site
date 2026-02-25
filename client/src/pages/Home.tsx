@@ -45,26 +45,34 @@ export default function Home() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const handleSignUp = (e: React.FormEvent) => {
-    // If you want to use Formspree, you can change the form tag to:
-    // <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
-    // and remove this onSubmit handler.
-    
+  const handleSignUp = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!email) return;
-    
-    console.log("Sign up:", email);
-    
-    // For a real production app on Replit, you would typically:
-    // 1. Create a backend API endpoint (e.g., /api/waitlist)
-    // 2. Use fetch() or axios to send the email to that endpoint
-    // 3. Store it in a database (like Replit's Postgres)
-    
-    toast({
-      title: "Early access requested!",
-      description: "We've logged your interest (check the console!). In a full app, this would save to a database.",
-    });
-    setEmail("");
+
+    try {
+      const response = await fetch("/api/waitlist", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email }),
+      });
+
+      if (!response.ok) {
+        const error = await response.json();
+        throw new Error(error.message || "Failed to sign up");
+      }
+
+      toast({
+        title: "Success!",
+        description: "You've been added to our early access list.",
+      });
+      setEmail("");
+    } catch (error: any) {
+      toast({
+        title: "Error",
+        description: error.message,
+        variant: "destructive",
+      });
+    }
   };
 
   const fadeIn = {
@@ -149,7 +157,7 @@ export default function Home() {
             <motion.p variants={fadeIn} className="text-xl md:text-2xl text-gray-500 max-w-3xl mx-auto leading-relaxed">
               Generate compliant WH-347 reports in minutes—not hours. AI-powered classification matching catches errors before they become penalties. Built by a former DOL investigator.
             </motion.p>
-            
+
             <motion.div variants={fadeIn} className="max-w-xl mx-auto mt-10">
               <form onSubmit={handleSignUp} className="flex flex-col sm:flex-row gap-3">
                 <Input 
@@ -176,10 +184,6 @@ export default function Home() {
               <div className="flex items-center gap-2 grayscale hover:grayscale-0 transition-all cursor-default">
                 <Lock className="h-5 w-5" />
                 <span className="font-bold text-sm">🔒 Bank-level encryption</span>
-              </div>
-              <div className="flex items-center gap-2 grayscale hover:grayscale-0 transition-all cursor-default">
-                <Shield className="h-5 w-5" />
-                <span className="font-bold text-sm">🛡️ SOC 2 compliant</span>
               </div>
               <div className="flex items-center gap-2 grayscale hover:grayscale-0 transition-all cursor-default">
                 <FileText className="h-5 w-5" />

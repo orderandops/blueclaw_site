@@ -1,23 +1,45 @@
-import { type User, type InsertUser } from "@shared/schema";
-import { randomUUID } from "crypto";
-
-// modify the interface with any CRUD methods
-// you might need
+import { leads, type Lead, type InsertLead, type User, type InsertUser } from "@shared/schema";
 
 export interface IStorage {
-  getUser(id: string): Promise<User | undefined>;
+  // Lead operations
+  createLead(lead: InsertLead): Promise<Lead>;
+  getLeads(): Promise<Lead[]>;
+  
+  // User operations (existing)
+  getUser(id: number): Promise<User | undefined>;
   getUserByUsername(username: string): Promise<User | undefined>;
   createUser(user: InsertUser): Promise<User>;
 }
 
 export class MemStorage implements IStorage {
-  private users: Map<string, User>;
+  private users: Map<number, User>;
+  private leads: Map<number, Lead>;
+  private currentUserId: number;
+  private currentLeadId: number;
 
   constructor() {
     this.users = new Map();
+    this.leads = new Map();
+    this.currentUserId = 1;
+    this.currentLeadId = 1;
   }
 
-  async getUser(id: string): Promise<User | undefined> {
+  async createLead(insertLead: InsertLead): Promise<Lead> {
+    const id = this.currentLeadId++;
+    const lead: Lead = { 
+      id, 
+      email: insertLead.email, 
+      createdAt: new Date() 
+    };
+    this.leads.set(id, lead);
+    return lead;
+  }
+
+  async getLeads(): Promise<Lead[]> {
+    return Array.from(this.leads.values());
+  }
+
+  async getUser(id: number): Promise<User | undefined> {
     return this.users.get(id);
   }
 
@@ -28,7 +50,7 @@ export class MemStorage implements IStorage {
   }
 
   async createUser(insertUser: InsertUser): Promise<User> {
-    const id = randomUUID();
+    const id = this.currentUserId++;
     const user: User = { ...insertUser, id };
     this.users.set(id, user);
     return user;
