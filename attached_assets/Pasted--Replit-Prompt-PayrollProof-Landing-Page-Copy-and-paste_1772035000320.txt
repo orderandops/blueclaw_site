@@ -1,0 +1,273 @@
+# Replit Prompt: PayrollProof Landing Page
+
+Copy and paste everything below this line into Replit's AI assistant:
+
+---
+
+Create a modern, professional landing page for a SaaS product called "PayrollProof by O&O Consulting" that helps construction subcontractors generate compliant certified payroll reports (WH-347 forms) for Davis-Bacon and prevailing wage projects.
+
+## Technical Requirements
+- Single HTML file with embedded CSS and JavaScript
+- Mobile-responsive design
+- Clean, modern aesthetic (think Stripe, Linear, or Vercel style)
+- Smooth scroll navigation
+- Email signup form that captures submissions (use Formspree action="https://formspree.io/f/YOUR_FORM_ID" as placeholder, or console.log for now)
+- No external dependencies except Google Fonts (use Inter or similar clean font)
+
+## Color Scheme
+- Primary: Deep blue (#1e3a5f) — conveys trust, compliance, professionalism
+- Accent: Bright teal (#10b981) — for CTAs and success states
+- Background: White (#ffffff) and light gray (#f9fafb)
+- Text: Dark gray (#111827)
+- Early access badge/highlight: Amber/gold (#f59e0b)
+- Strikethrough prices: Gray (#9ca3af)
+
+## Page Structure
+
+### 1. Navigation Bar (sticky, white background with subtle shadow on scroll)
+- Logo/company name "PayrollProof" on left (add small "by O&O Consulting" underneath or next to it in smaller text)
+- Links: How It Works, Pricing, FAQ
+- CTA button: "Sign Up Now" on right (teal background, white text)
+
+### 2. Hero Section
+- Small badge above headline: "🚀 Early Access — 25% Off All Plans" (amber/gold background, dark text, rounded pill shape)
+- Headline (large, bold): "Stop struggling with certified payroll."
+- Subheadline (medium gray text): "Generate compliant WH-347 reports in minutes—not hours. AI-powered classification matching catches errors before they become penalties. Built by a former DOL investigator."
+- Email input field with placeholder "Enter your work email" + "Sign Up Now" button (teal)
+- Below form in small text: "✓ No credit card required · ✓ 25% off for early access · ✓ Cancel anytime"
+- Trust badges row with icons: "🔒 Bank-level encryption · 🛡️ SOC 2 compliant infrastructure · 📋 DOL-compliant output"
+
+### 3. Problem Section (light gray background)
+- Header: "Sound familiar?"
+- 5 pain points in a grid or list with red X icons (use ✗ or ❌):
+  - "You won a prevailing wage job, but the paperwork is confusing"
+  - "The GC keeps asking where your certified payroll is"
+  - "You're not sure if you classified workers correctly"
+  - "Your payroll system doesn't create WH-347s"
+  - "You're worried about getting flagged in an audit"
+
+- Stat callout box (dark blue background #1e3a5f, white text, centered):
+  Large text: "$197 Million+"
+  Smaller text below: "in back wages paid by contractors for Davis-Bacon violations since 1985. One misclassification case alone cost $2 million."
+
+- Transition text below: "You're not alone. Most subcontractors lose 3-5 hours per week on certified payroll—or risk mistakes that trigger costly penalties."
+
+### 4. Solution Section (How It Works) - white background
+- Header: "There's a simpler way."
+- 3 steps in horizontal layout with large circled numbers (1, 2, 3), icons, and descriptions:
+
+  **Step 1: Upload your payroll**
+  Icon: Upload/document icon
+  "Export from QuickBooks, Gusto, or Excel. Use our template or upload your existing format. We map the data automatically."
+
+  **Step 2: AI maps and validates**
+  Icon: AI/brain or checkmark icon
+  "Our AI reads your wage determination, matches workers to correct classifications, and flags errors before they become penalties."
+
+  **Step 3: Download your WH-347**
+  Icon: Download/document icon
+  "Get a compliant certified payroll report ready to submit. Every week. In minutes, not hours."
+
+### 5. Differentiation Section (light gray background)
+- Header: "Built different."
+- Side-by-side comparison with two columns:
+
+**Left Column: "Other Solutions"** (plain styling, gray background)
+- ✗ Require you to switch payroll systems
+- ✗ Built for agencies and large GCs
+- ✗ Weeks of training to learn
+- ✗ $500–2,000+/month
+- ✗ Built by software people
+- ✗ Check for completeness only
+
+**Right Column: "PayrollProof"** (highlighted with teal left border or light teal background, checkmarks in teal)
+- ✓ Works with your existing payroll
+- ✓ Built for subcontractors like you
+- ✓ No training—upload and go
+- ✓ Starting at $74/month
+- ✓ Built by a former DOL investigator
+- ✓ Catches the errors that trigger audits
+
+### 6. Credibility Section (white background)
+- Header: "Why trust us?"
+- Large styled blockquote with a teal left border (4px solid):
+  
+  "I spent years as a DOL investigator reviewing certified payroll—and then as an HR Director at a construction company assisting payroll. I built this because I know exactly what compliance looks like—and how hard it is without help."
+
+- Below the quote, founder attribution:
+  **Darcie Gregoire, SPHR, SHRM-SCP**
+  Former DOL Wage & Hour Investigator and HR Director
+
+- Optional: Add a placeholder for a professional headshot (circular, with border)
+
+### 7. Features Section (light gray background)
+- Header: "Everything you need. Nothing you don't."
+- 6 features in a 2x3 or 3x2 responsive grid, each with an icon, title, and short description:
+
+  **Smart Classification Matching**
+  "Describe what workers did in plain English. AI matches to correct wage determination codes and explains why."
+
+  **Pre-Submission Validation**
+  "Catch rate errors, fringe shortfalls, and classification mismatches before you submit—not during an audit."
+
+  **Any Payroll Format**
+  "Upload from QuickBooks, Gusto, Excel, or use our template. No payroll system switch required."
+
+  **Instant WH-347 Generation**
+  "Compliant reports formatted exactly how agencies expect. Download as PDF, ready to submit."
+
+  **Audit-Ready Records**
+  "Every classification decision documented and exportable. Nothing to scramble for when auditors call."
+
+  **State Prevailing Wage** (add "Coming Soon" badge)
+  "California DIR, New York, and more. One tool for federal and state compliance."
+
+### 8. Pricing Section (white background) — MAKE THIS SECTION VISUALLY STRONG
+- Header: "Simple pricing. Serious protection."
+- Subheader: "Choose the plan that fits your business. All plans include unlimited certified payrolls."
+- Early access banner spanning full width above cards: "🎉 EARLY ACCESS: 25% OFF ALL PLANS — LIMITED TIME" (amber/gold background)
+
+**Three pricing cards side by side (equal height, with hover shadow effect):**
+
+---
+
+**CARD 1: Starter**
+- Small label at top: "For small specialty subs"
+- Price section:
+  - Strikethrough regular price: "$99/mo" (gray, strikethrough)
+  - Early access price: "$74" (large, bold, teal) + "/mo" (smaller)
+  - Small text: "Billed monthly · Cancel anytime"
+- Divider line
+- Features list with teal checkmarks:
+  - 1 active project
+  - Up to 15 workers
+  - Unlimited certified payrolls
+  - AI classification matching
+  - Pre-submission validation
+  - WH-347 PDF generation
+  - Email support
+- CTA button (outlined/secondary style): "Sign Up Now"
+
+---
+
+**CARD 2: Professional** — HIGHLIGHT THIS CARD (add border, shadow, or "MOST POPULAR" ribbon)
+- "MOST POPULAR" badge at top corner (teal background, white text, angled or pill)
+- Small label: "For growing contractors"
+- Price section:
+  - Strikethrough regular price: "$199/mo" (gray, strikethrough)
+  - Early access price: "$149" (large, bold, teal) + "/mo" (smaller)
+  - Small text: "Billed monthly · Cancel anytime"
+- Divider line
+- Features list with teal checkmarks:
+  - Everything in Starter, plus:
+  - 3 active projects
+  - Up to 50 workers
+  - Priority email support
+  - Multi-state wage determinations
+  - Classification audit log
+- CTA button (solid teal, prominent): "Sign Up Now"
+
+---
+
+**CARD 3: Business**
+- Small label at top: "For established contractors"
+- Price section:
+  - Strikethrough regular price: "$399/mo" (gray, strikethrough)
+  - Early access price: "$299" (large, bold, teal) + "/mo" (smaller)
+  - Small text: "Billed monthly · Cancel anytime"
+- Divider line
+- Features list with teal checkmarks:
+  - Everything in Professional, plus:
+  - Unlimited projects
+  - Unlimited workers
+  - Phone support
+  - Dedicated account manager
+  - Custom onboarding
+  - API access (coming soon)
+- CTA button (outlined/secondary style): "Sign Up Now"
+
+---
+
+- Below pricing cards, add a line: "All plans include a 30-day money-back guarantee. Questions? Email hello@orderandoperations.com"
+
+### 9. FAQ Section (light gray background)
+- Header: "Questions? We've got answers."
+- Accordion-style FAQ (click to expand/collapse with smooth animation):
+
+**Q: Do I need to switch payroll systems?**
+A: "No. Keep using QuickBooks, Gusto, ADP, or whatever you use now. Export your payroll data, upload it to PayrollProof, and we generate the certified payroll report. No migration, no disruption."
+
+**Q: What if I don't know how to classify my workers?**
+A: "That's exactly what we solve. Describe what your workers did in plain English—like 'ran conduit and pulled wire'—and our AI matches it to the correct wage determination classification. We explain why, so you learn as you go."
+
+**Q: Is this for federal Davis-Bacon or state prevailing wage?**
+A: "We fully support federal Davis-Bacon projects at launch. State prevailing wage support (California DIR, New York, and others) is coming soon."
+
+**Q: How is this different from LCPtracker or eMars?**
+A: "Those tools are built for agencies to collect payrolls and for large GCs to manage compliance across dozens of subs. PayrollProof is built for you—the subcontractor who needs to get the form right and submit it. No training, no complexity, no enterprise sales process."
+
+**Q: What if I get audited?**
+A: "Our reports are formatted to DOL standards, and our validation engine is built by someone who used to conduct those audits. You'll have clean documentation and records of every classification decision. That said, we're a tool—not legal advice. For specific compliance questions, consult a labor attorney."
+
+**Q: How do you keep my data secure?**
+A: "We use bank-level encryption (AES-256) for all data at rest and in transit. We only store the last 4 digits of Social Security Numbers—never the full number. You can delete your data anytime. Our infrastructure is SOC 2 compliant."
+
+**Q: Can I cancel anytime?**
+A: "Yes. All plans are month-to-month with no long-term contracts. Cancel anytime from your dashboard—no questions asked."
+
+### 10. Final CTA Section (dark blue background #1e3a5f, white text)
+- Header: "Ready to stop dreading satisfying certified payroll?"
+- Subheader: "Sign up now and lock in 25% off before early access ends."
+- Email input field (white background) + "Sign Up Now" button (teal)
+- Below form: "✓ No credit card required · ✓ 30-day money-back guarantee"
+
+### 11. Footer (dark gray or dark blue background)
+- Left side: "PayrollProof by O&O Consulting"
+- Center: Links — Privacy Policy | Terms of Service
+- Right side: "Questions? hello@orderandoperations.com"
+- Bottom line: "© 2026 Order and Operations Consulting. All rights reserved."
+
+---
+
+## Additional Styling Notes
+
+1. **Typography**: Use Inter or a similar clean sans-serif font. Headlines should be bold (700), body text regular (400).
+
+2. **Spacing**: Generous padding between sections (80-120px). Cards should have comfortable internal padding (24-32px).
+
+3. **Buttons**: 
+   - Primary buttons: Teal (#10b981) background, white text, rounded corners (8px), subtle hover darkening
+   - Secondary/outline buttons: White background, teal border and text, same rounded corners
+
+4. **Cards**: White background, subtle shadow (0 4px 6px rgba(0,0,0,0.1)), rounded corners (12px), hover effect that lifts the card slightly
+
+5. **The "Most Popular" pricing card**: Should stand out with a teal border (2px), slightly larger shadow, and the badge at the top
+
+6. **Strikethrough prices**: Use CSS text-decoration: line-through and gray color to clearly show the discount
+
+7. **Mobile responsiveness**: 
+   - Navigation collapses to hamburger menu
+   - Pricing cards stack vertically
+   - Feature grid becomes single column
+   - All text remains readable
+
+8. **Smooth scrolling**: Add scroll-behavior: smooth to html element
+
+9. **FAQ accordion**: Use JavaScript to toggle visibility with smooth height animation
+
+---
+
+## Form Handling Note
+
+For the email signup forms, use this Formspree placeholder (the user will replace with their actual form ID):
+
+```html
+<form action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+  <input type="email" name="email" placeholder="Enter your work email" required>
+  <button type="submit">Sign Up Now</button>
+</form>
+```
+
+---
+
+Please generate the complete HTML file with all CSS and JavaScript embedded. Make it production-ready and visually polished.
