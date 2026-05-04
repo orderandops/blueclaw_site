@@ -38,6 +38,7 @@ export default function Home() {
   const [email, setEmail] = useState("");
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [billing, setBilling] = useState<"monthly" | "annual">("monthly");
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 20);
@@ -95,12 +96,8 @@ export default function Home() {
       {/* Navigation */}
       <nav className={`sticky top-0 z-50 w-full transition-all duration-300 ${scrolled ? "bg-white/90 backdrop-blur-md shadow-sm py-2" : "bg-white py-4"}`}>
         <div className="container mx-auto px-4 flex items-center justify-between">
-          <div className="flex flex-col">
-            <div className="flex items-center gap-2">
-              <ShieldCheck className="h-6 w-6 text-primary" />
-              <span className="text-xl font-bold text-primary tracking-tight">PayrollProof</span>
-            </div>
-            <span className="text-[10px] text-gray-500 font-medium tracking-wide uppercase">by O&O Consulting</span>
+          <div className="flex items-center">
+            <img src="/payrollproof-logo.png" alt="PayrollProof" className="h-12 w-auto" />
           </div>
           
           {/* Desktop Nav */}
@@ -421,45 +418,79 @@ export default function Home() {
       {/* Pricing Section */}
       <section id="pricing" className="py-32 bg-white overflow-hidden">
         <div className="container mx-auto px-4 max-w-6xl">
-          <div className="text-center mb-16">
+          <div className="text-center mb-10">
             <h2 className="text-3xl md:text-5xl font-bold text-gray-900 mb-4">Simple pricing. Serious protection.</h2>
-            <p className="text-xl text-gray-500 font-medium max-w-2xl mx-auto">Choose the plan that fits your business. All plans include unlimited certified payrolls.</p>
+            <p className="text-xl text-gray-500 font-medium max-w-2xl mx-auto">Choose the plan that fits your business.</p>
           </div>
-          
+
+          {/* Billing Toggle */}
+          <div className="flex items-center justify-center gap-4 mb-12">
+            <span className={`font-bold text-sm ${billing === "monthly" ? "text-gray-900" : "text-gray-400"}`}>Monthly</span>
+            <button
+              onClick={() => setBilling(billing === "monthly" ? "annual" : "monthly")}
+              className={`relative w-14 h-7 rounded-full transition-colors duration-300 ${billing === "annual" ? "bg-secondary" : "bg-gray-200"}`}
+            >
+              <span className={`absolute top-1 w-5 h-5 bg-white rounded-full shadow transition-transform duration-300 ${billing === "annual" ? "translate-x-8" : "translate-x-1"}`} />
+            </button>
+            <span className={`font-bold text-sm ${billing === "annual" ? "text-gray-900" : "text-gray-400"}`}>
+              Annual <span className="ml-1.5 bg-green-100 text-green-700 text-xs font-black px-2 py-0.5 rounded-full">SAVE 20%</span>
+            </span>
+          </div>
+
           <div className="bg-[#f59e0b] text-center py-4 text-[#451a03] font-black tracking-widest text-sm rounded-t-2xl mb-8 flex items-center justify-center gap-2">
-            <span>🎉 EARLY ACCESS: 25% OFF ALL PLANS — LIMITED TIME</span>
+            <span>🎉 EARLY ACCESS — LIMITED TIME</span>
+          </div>
+
+          {/* All-included features note */}
+          <div className="bg-primary/5 border border-primary/10 rounded-2xl p-6 mb-10 text-center">
+            <p className="font-bold text-primary text-sm uppercase tracking-widest mb-3">All plans include</p>
+            <div className="flex flex-wrap justify-center gap-x-8 gap-y-2 text-sm text-gray-700 font-semibold">
+              {[
+                "Unlimited projects",
+                "Unlimited edits & previews",
+                "Wage determination parsing & storage",
+                "Compliance checking (wages, fringes, classifications, CWHSSA OT)",
+                "Electronic signature capture",
+                "PDF storage & re-download",
+                "Email support"
+              ].map((item, i) => (
+                <span key={i} className="flex items-center gap-1.5">
+                  <CheckCircle2 className="h-3.5 w-3.5 text-secondary shrink-0" /> {item}
+                </span>
+              ))}
+            </div>
           </div>
           
           <div className="grid md:grid-cols-3 gap-8">
             {/* CARD 1: Starter */}
             <div className="bg-white rounded-3xl p-8 border border-gray-100 shadow-sm flex flex-col hover:shadow-xl transition-all">
-              <div className="text-sm font-bold text-gray-400 uppercase tracking-widest mb-6">For small specialty subs</div>
+              <div className="text-sm font-bold text-gray-400 uppercase tracking-widest mb-2">Starter</div>
+              <div className="text-xs text-gray-400 font-medium mb-6">For small specialty subs</div>
               <div className="mb-8">
-                <div className="text-gray-400 line-through text-lg font-bold mb-1">$99/mo</div>
+                {billing === "annual" && (
+                  <div className="text-gray-400 line-through text-base font-bold mb-1">$99/mo</div>
+                )}
                 <div className="flex items-baseline gap-1">
-                  <span className="text-5xl font-black text-secondary">$74</span>
+                  <span className="text-5xl font-black text-secondary">{billing === "monthly" ? "$99" : "$79"}</span>
                   <span className="text-gray-500 font-bold">/mo</span>
                 </div>
-                <div className="text-gray-400 text-sm font-bold mt-2">Billed monthly · Cancel anytime</div>
+                {billing === "annual" ? (
+                  <div className="text-green-600 text-sm font-bold mt-2">$948/yr · You save $240/yr</div>
+                ) : (
+                  <div className="text-gray-400 text-sm font-bold mt-2">Billed monthly · Cancel anytime</div>
+                )}
               </div>
-              <div className="w-full h-px bg-gray-100 mb-8" />
-              <ul className="space-y-4 mb-10 flex-1">
-                {[
-                  "1 active project",
-                  "Up to 15 workers",
-                  "Unlimited certified payrolls",
-                  "AI classification matching",
-                  "Pre-submission validation",
-                  "WH-347 PDF generation",
-                  "Email support"
-                ].map((item, i) => (
-                  <li key={i} className="flex items-start gap-3 font-semibold text-gray-700">
-                    <CheckCircle2 className="h-5 w-5 text-secondary shrink-0" />
-                    <span>{item}</span>
-                  </li>
-                ))}
-              </ul>
-              <Button onClick={() => document.getElementById('hero-email')?.focus()} variant="outline" className="w-full h-14 rounded-xl border-secondary text-secondary hover:bg-secondary hover:text-white font-bold text-lg">
+              <div className="w-full h-px bg-gray-100 mb-6" />
+              <div className="mb-8">
+                <div className="flex items-center gap-3 p-4 bg-blue-50 rounded-xl">
+                  <div className="text-3xl font-black text-primary">6</div>
+                  <div>
+                    <div className="font-bold text-gray-900 text-sm">payroll generations</div>
+                    <div className="text-gray-500 text-xs">per month</div>
+                  </div>
+                </div>
+              </div>
+              <Button onClick={() => document.getElementById('hero-email')?.focus()} variant="outline" className="w-full h-14 rounded-xl border-secondary text-secondary hover:bg-secondary hover:text-white font-bold text-lg mt-auto">
                 Sign Up Now
               </Button>
             </div>
@@ -469,65 +500,66 @@ export default function Home() {
               <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-secondary text-white px-6 py-1.5 rounded-full text-xs font-black tracking-widest uppercase">
                 MOST POPULAR
               </div>
-              <div className="text-sm font-bold text-primary/40 uppercase tracking-widest mb-6">For growing contractors</div>
+              <div className="text-sm font-bold text-primary/60 uppercase tracking-widest mb-2">Professional</div>
+              <div className="text-xs text-gray-400 font-medium mb-6">For growing contractors</div>
               <div className="mb-8">
-                <div className="text-gray-400 line-through text-lg font-bold mb-1">$199/mo</div>
+                {billing === "annual" && (
+                  <div className="text-gray-400 line-through text-base font-bold mb-1">$179/mo</div>
+                )}
                 <div className="flex items-baseline gap-1">
-                  <span className="text-5xl font-black text-secondary">$149</span>
+                  <span className="text-5xl font-black text-secondary">{billing === "monthly" ? "$179" : "$143"}</span>
                   <span className="text-gray-500 font-bold">/mo</span>
                 </div>
-                <div className="text-gray-400 text-sm font-bold mt-2">Billed monthly · Cancel anytime</div>
+                {billing === "annual" ? (
+                  <div className="text-green-600 text-sm font-bold mt-2">$1,716/yr · You save $432/yr</div>
+                ) : (
+                  <div className="text-gray-400 text-sm font-bold mt-2">Billed monthly · Cancel anytime</div>
+                )}
               </div>
-              <div className="w-full h-px bg-gray-100 mb-8" />
-              <ul className="space-y-4 mb-10 flex-1">
-                {[
-                  "Everything in Starter, plus:",
-                  "3 active projects",
-                  "Up to 50 workers",
-                  "Priority email support",
-                  "Multi-state wage determinations",
-                  "Classification audit log"
-                ].map((item, i) => (
-                  <li key={i} className="flex items-start gap-3 font-bold text-gray-900">
-                    <CheckCircle2 className="h-5 w-5 text-secondary shrink-0" />
-                    <span>{item}</span>
-                  </li>
-                ))}
-              </ul>
-              <Button onClick={() => document.getElementById('hero-email')?.focus()} className="w-full h-14 rounded-xl bg-secondary hover:bg-secondary/90 text-white font-bold text-lg shadow-lg">
+              <div className="w-full h-px bg-gray-100 mb-6" />
+              <div className="mb-8">
+                <div className="flex items-center gap-3 p-4 bg-blue-50 rounded-xl">
+                  <div className="text-3xl font-black text-primary">25</div>
+                  <div>
+                    <div className="font-bold text-gray-900 text-sm">payroll generations</div>
+                    <div className="text-gray-500 text-xs">per month</div>
+                  </div>
+                </div>
+              </div>
+              <Button onClick={() => document.getElementById('hero-email')?.focus()} className="w-full h-14 rounded-xl bg-secondary hover:bg-secondary/90 text-white font-bold text-lg shadow-lg mt-auto">
                 Sign Up Now
               </Button>
             </div>
 
             {/* CARD 3: Business */}
             <div className="bg-white rounded-3xl p-8 border border-gray-100 shadow-sm flex flex-col hover:shadow-xl transition-all">
-              <div className="text-sm font-bold text-gray-400 uppercase tracking-widest mb-6">For established contractors</div>
+              <div className="text-sm font-bold text-gray-400 uppercase tracking-widest mb-2">Business</div>
+              <div className="text-xs text-gray-400 font-medium mb-6">For established contractors</div>
               <div className="mb-8">
-                <div className="text-gray-400 line-through text-lg font-bold mb-1">$399/mo</div>
+                {billing === "annual" && (
+                  <div className="text-gray-400 line-through text-base font-bold mb-1">$349/mo</div>
+                )}
                 <div className="flex items-baseline gap-1">
-                  <span className="text-5xl font-black text-secondary">$299</span>
+                  <span className="text-5xl font-black text-secondary">{billing === "monthly" ? "$349" : "$279"}</span>
                   <span className="text-gray-500 font-bold">/mo</span>
                 </div>
-                <div className="text-gray-400 text-sm font-bold mt-2">Billed monthly · Cancel anytime</div>
+                {billing === "annual" ? (
+                  <div className="text-green-600 text-sm font-bold mt-2">$3,348/yr · You save $840/yr</div>
+                ) : (
+                  <div className="text-gray-400 text-sm font-bold mt-2">Billed monthly · Cancel anytime</div>
+                )}
               </div>
-              <div className="w-full h-px bg-gray-100 mb-8" />
-              <ul className="space-y-4 mb-10 flex-1">
-                {[
-                  "Everything in Professional, plus:",
-                  "Unlimited projects",
-                  "Unlimited workers",
-                  "Phone support",
-                  "Dedicated account manager",
-                  "Custom onboarding",
-                  "API access (coming soon)"
-                ].map((item, i) => (
-                  <li key={i} className="flex items-start gap-3 font-semibold text-gray-700">
-                    <CheckCircle2 className="h-5 w-5 text-secondary shrink-0" />
-                    <span>{item}</span>
-                  </li>
-                ))}
-              </ul>
-              <Button onClick={() => document.getElementById('hero-email')?.focus()} variant="outline" className="w-full h-14 rounded-xl border-secondary text-secondary hover:bg-secondary hover:text-white font-bold text-lg">
+              <div className="w-full h-px bg-gray-100 mb-6" />
+              <div className="mb-8">
+                <div className="flex items-center gap-3 p-4 bg-blue-50 rounded-xl">
+                  <div className="text-3xl font-black text-primary">∞</div>
+                  <div>
+                    <div className="font-bold text-gray-900 text-sm">payroll generations</div>
+                    <div className="text-gray-500 text-xs">per month</div>
+                  </div>
+                </div>
+              </div>
+              <Button onClick={() => document.getElementById('hero-email')?.focus()} variant="outline" className="w-full h-14 rounded-xl border-secondary text-secondary hover:bg-secondary hover:text-white font-bold text-lg mt-auto">
                 Sign Up Now
               </Button>
             </div>
@@ -622,12 +654,8 @@ export default function Home() {
       <footer className="bg-gray-900 text-gray-400 py-20 border-t border-gray-800">
         <div className="container mx-auto px-4">
           <div className="grid md:grid-cols-3 gap-12 items-center text-center md:text-left mb-16">
-            <div>
-              <div className="flex items-center justify-center md:justify-start gap-2 mb-2">
-                <ShieldCheck className="h-6 w-6 text-gray-500" />
-                <span className="text-2xl font-black text-white tracking-tighter">PayrollProof</span>
-              </div>
-              <span className="text-xs font-bold text-gray-600 uppercase tracking-widest">by O&O Consulting</span>
+            <div className="flex justify-center md:justify-start">
+              <img src="/payrollproof-logo.png" alt="PayrollProof" className="h-12 w-auto brightness-0 invert opacity-80" />
             </div>
             
             <div className="flex justify-center gap-8 text-sm font-black uppercase tracking-widest">
