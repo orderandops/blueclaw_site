@@ -22,6 +22,15 @@ app.use(
 
 app.use(express.urlencoded({ extended: false }));
 
+// Redirect certifiedpayroll.replit.app → payrollproof.com
+app.use((req, res, next) => {
+  const host = req.hostname;
+  if (host === "certifiedpayroll.replit.app") {
+    return res.redirect(301, "https://payrollproof.com" + req.originalUrl);
+  }
+  next();
+});
+
 export function log(message: string, source = "express") {
   const formattedTime = new Date().toLocaleTimeString("en-US", {
     hour: "numeric",
