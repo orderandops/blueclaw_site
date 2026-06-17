@@ -1,0 +1,74 @@
+I have a working mockup of a redesigned payrollproof.com in a single self-contained HTML file (I'll paste the code / attach the file). I want you to rebuild my existing PayrollProof Replit app to match this mockup exactly, then split it into a real multi-page site and wire the contact form to email me via Web3Forms.
+What's in the mockup
+The mockup is a single HTML file with all pages stacked and JavaScript swapping which one is visible. The four "pages" are:
+
+Home (/) — hero with team photo, three-offering overview, full PayrollProof Software section (steps, privacy note, three pricing tiers), founder teaser strip, contact band
+Managed Services (/managed-services) — page hero, strict-liability callout, "what's included" grid, "from $1,500/mo" anchor pricing card
+Bid Win Intensive (/bid-win-intensive) — page hero, "preferred sub" lead banner, "why $4,500 is a no-brainer" value strip, four-week timeline, deliverables list, flat-fee $4,500 price card
+Founder (/founder) — page hero, headshot, Darcie's bio and credential chips, contact block
+
+Shared nav and footer across all pages. There's a Request a Proposal modal that triggers from:
+
+The Managed Services "Request a proposal" buttons (nav, price card, footer) — opens with GC-facing copy, hidden inquiry_type=Managed Services
+The Bid Win Intensive "Just won a bid? Let's set it up" button — opens with sub-facing copy, hidden inquiry_type=Bid Win Intensive
+
+Form fields: first name, last name, email, phone, company name (all required), project county, project state, additional information (all optional). Plus a Calendly link button.
+What to do
+1. Rebuild the existing Replit app
+Replace whatever's currently in the app with the structure from my HTML file. Keep all styling, copy, colors, fonts, layout, and responsive behavior exactly as shown — do not redesign anything. Brand colors are navy #2B4C7E, navy-deep #1B3358, orange #E8732A, orange-soft #F4A968. Fonts are Google Fonts: Archivo (display), Inter (body), IBM Plex Mono (labels/numbers).
+2. Split into real routed pages
+Each of the four "pages" in the mockup should become its own route with its own HTML document, proper <title>, meta description, and OG tags:
+RouteTitleMeta description/PayrollProof — Davis-Bacon Compliance for Federal ConstructionDavis-Bacon compliance handled three ways — managed services for GCs, a setup intensive for subs new to federal work, and self-service certified payroll software./managed-servicesManaged Compliance Services for General Contractors — PayrollProofFull-service Davis-Bacon compliance administration for general contractors on federally funded construction. Weekly certified payroll collection, audits, portal submission, and remediation./bid-win-intensiveBid Win Intensive — Davis-Bacon Setup for Subcontractors — PayrollProofA one-month, $4,500 flat-fee setup for subcontractors who just won their first federal-aid bid. We stand up your compliance process and hand it back to you./founderDarcie Gregoire, Founder — PayrollProofFormer U.S. Department of Labor Wage & Hour Investigator. SPHR, SHRM-SCP. Charlotte, NC.
+Nav links should use real anchors so each page is independently shareable. The "Software" nav link should go to /#software (the software section stays on the home page). The PayrollProof logo in the nav and footer should link to /.
+Remove the page-swap JavaScript from the mockup — that was only there so I could preview navigation in a single file. In the real app, each route loads its own page.
+3. Use the assets I'm providing
+I have three image files to include:
+
+payrollproof-logo.jpg — used in the nav (in a white pill container, as in the mockup) and the footer
+darcie-headshot.jpg — used on the home founder teaser and the founder page (display at native 200×220 size; do not upscale — the source is only 200×200)
+team-jobsite.jpg — used in the home hero as the right-column visual
+
+In the mockup these are base64-embedded as data URIs (LOGO_SRC, HEADSHOT_SRC, TEAM_SRC near the top of the IIFE). Extract them into real image files in an /assets folder and reference by path. Add proper alt text:
+
+Logo: PayrollProof
+Headshot: Darcie Gregoire, founder of PayrollProof
+Team photo: A compliance professional reviewing certified payroll on a tablet with a project team on a federal construction job site
+
+4. Wire the proposal form to Web3Forms
+The proposal modal form should submit directly to Web3Forms — no backend endpoint needed. Web3Forms accepts a client-side fetch to https://api.web3forms.com/submit and emails me on every valid submission.
+Form submission setup:
+
+Add a hidden field to the form: <input type="hidden" name="access_key" value="WEB3FORMS_ACCESS_KEY_HERE">. I will paste my actual key in place of WEB3FORMS_ACCESS_KEY_HERE — leave that placeholder so I can find it. The access key is safe to expose client-side; Web3Forms locks submissions to the domain I registered.
+Add a hidden subject field that dynamically populates based on inquiry_type so my inbox subject lines are clean:
+
+New ${inquiry_type} inquiry from ${first} ${last} (${company})
+
+e.g., "New Managed Services inquiry from Jane Smith (Acme Construction)"
+Add a hidden from_name field: PayrollProof Website
+Add a hidden honeypot field: <input type="checkbox" name="botcheck" style="display:none"> — Web3Forms uses this to silently drop spam.
+The frontend submit handler is already scaffolded (look for FORM_ENDPOINT near the top of the IIFE in the mockup). Set it to https://api.web3forms.com/submit. The existing code already POSTs a FormData object containing first, last, email, phone, company, county, state, notes, and inquiry_type — Web3Forms will pick those up automatically and include every field in the notification email.
+On a successful response (response.json().success === true), advance the modal to the "Ready to talk?" success screen as it already does. On failure, still advance the user to the success screen (don't trap them), but console.error the response so I can debug from browser dev tools.
+The "Book a meeting on my calendar" buttons in both the form and the success screen go to https://calendly.com/darcie-orderandoperations/30min, opening in a new tab with rel="noopener".
+
+5. Polish
+
+Confirm all responsive breakpoints from the mockup work (the hero should collapse to a single column at ~1040px; the desktop nav should switch to a hamburger drawer at ~900px; further collapses at 680px, 600px, and 380px are already in the CSS)
+Set up a favicon.ico from the logo
+Add a basic sitemap.xml listing all four routes
+Add a robots.txt that allows all crawlers
+Make sure the Google Fonts links (Archivo, Inter, IBM Plex Mono) are in the <head> of every page
+
+6. Don't touch
+
+Do not change any copy, prices, layout, color choices, or component structure from the mockup
+Do not redesign anything to "improve" it — match the mockup exactly
+Do not add tracking scripts, analytics, or third-party widgets unless I ask
+Do not build a backend for the form — Web3Forms is fully client-side
+
+When you're done, give me:
+
+The list of routes and that they load
+Confirmation the form posts to https://api.web3forms.com/submit and that the access_key placeholder is easy to find
+A test submission walkthrough I can run to confirm an email arrives at darcie@blueclaw.tech
+
+The HTML file follows.
