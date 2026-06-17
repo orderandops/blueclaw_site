@@ -12,6 +12,7 @@ import AdminLeads from "@/pages/AdminLeads";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import ProposalModal from "@/components/ProposalModal";
+import ScrollToTop from "@/components/ScrollToTop";
 import { ModalProvider, useModal } from "@/context/ModalContext";
 
 function ModalRenderer() {
@@ -22,6 +23,7 @@ function ModalRenderer() {
 function Router() {
   return (
     <>
+      <ScrollToTop />
       <Nav />
       <Switch>
         <Route path="/" component={Home} />

@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { useModal } from "@/context/ModalContext";
 import { Link } from "wouter";
 
@@ -16,6 +17,20 @@ const ShieldCheckSvg = () => (
 
 export default function Home() {
   const { openModal } = useModal();
+
+  useEffect(() => {
+    if (window.location.hash === "#software") {
+      const tryScroll = (attempts = 0) => {
+        const el = document.getElementById("software");
+        if (el) {
+          el.scrollIntoView({ behavior: "smooth" });
+        } else if (attempts < 10) {
+          setTimeout(() => tryScroll(attempts + 1), 50);
+        }
+      };
+      tryScroll();
+    }
+  }, []);
 
   const handleSoftware = (e: React.MouseEvent) => {
     e.preventDefault();

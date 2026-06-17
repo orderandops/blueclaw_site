@@ -104,7 +104,7 @@ export default function ProposalModal() {
 
               <form ref={formRef} onSubmit={handleSubmit} noValidate>
                 {/* Web3Forms hidden fields */}
-                <input type="hidden" name="access_key" value="WEB3FORMS_ACCESS_KEY_HERE" />
+                <input type="hidden" name="access_key" value="5986a864-27bf-46e4-8351-fd4bd9fafcdb" />
                 <input type="hidden" name="from_name" value="PayrollProof Website" />
                 <input type="hidden" name="inquiry_type" value={copy.type} />
                 <input type="checkbox" name="botcheck" style={{ display: "none" }} />
