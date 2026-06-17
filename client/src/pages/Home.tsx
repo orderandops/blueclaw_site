@@ -132,10 +132,6 @@ export default function Home() {
             <div className="step"><div className="num">03</div><h4>Review the flags</h4><p>We check rates, classifications, fringe, and CWHSSA overtime — and flag anything to look at, in plain language.</p></div>
             <div className="step"><div className="num">04</div><h4>Sign &amp; generate</h4><p>Certify electronically and download an audit-ready, two-page WH-347. Re-download anytime.</p></div>
           </div>
-          <div className="privacy-note">
-            <ShieldCheckSvg />
-            <div><strong>Your employees' data never touches our servers.</strong> Names, SSNs, and pay details stay in your browser for the session. Only the finished WH-347 PDF is saved — so you can re-download it, and nothing else is stored.</div>
-          </div>
           <div className="tiers">
             <div className="tier">
               <span className="tname">Starter</span>
@@ -180,7 +176,7 @@ export default function Home() {
       <section className="pp-section f-teaser">
         <div className="wrap f-teaser-in">
           <div className="f-mini">
-            <img src="/assets/darcie-headshot.jpg" alt="Darcie Gregoire, founder of PayrollProof" />
+            <img src="/assets/darcie-headshot.png" alt="Darcie Gregoire, founder of PayrollProof" />
           </div>
           <div>
             <span className="eyebrow">Founder</span>
