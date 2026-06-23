@@ -1,0 +1,13 @@
+I need you to add a new page to my React/Vite/TypeScript site at the route /brief. This is a newsletter signup landing page for my Federal Construction Intel Brief newsletter.
+What to do:
+
+Create a new file at client/src/pages/Brief.tsx that contains the full landing page below. The page should be a self-contained React component using inline styles (matching the HTML structure I'm providing). Convert the HTML to valid JSX — change class= to className=, self-close void elements like <img />, <input />, <br />, and handle the inline <style> blocks by either keeping them inside a <style dangerouslySetInnerHTML={{__html: ...}} /> tag or extracting them to a separate CSS file imported by the component.
+Add a route for /brief in client/src/App.tsx that renders the new Brief component. Follow the exact same routing pattern used for the existing pages (Home, Founder, etc.) — don't change the routing library.
+Use the existing logo file already in the project at /assets/payrollproof-logo.jpg (it's in client/public/assets/). Replace the src="PayrollProof_Logo.jpg" reference in the HTML below with the correct path that works in this Vite project (likely /assets/payrollproof-logo.jpg).
+The landing page contains an embedded MailerLite signup form (form ID 42969011) with its own scoped CSS and JavaScript. Preserve the MailerLite form HTML, CSS, and the three <script> blocks at the bottom exactly as written — they must remain functional. The form submits to a MailerLite endpoint, so don't refactor it into a controlled React form. The two MailerLite <script> tags that load external JS (groot.mailerlite.com and assets.mailerlite.com) should be loaded once when the component mounts using a useEffect hook to dynamically inject them into <head> or <body>, so they only run on the Brief page (not site-wide).
+After making the changes, restart the dev server and confirm:
+
+Navigating to /brief loads the page
+The PayrollProof logo displays in the header
+The MailerLite signup form renders correctly
+The page doesn't break any existing routes (Home, Founder, etc.)
