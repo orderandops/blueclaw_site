@@ -35,7 +35,7 @@ export default function Nav() {
           <Link href="/bid-win-intensive" className={isActive("/bid-win-intensive") ? "active" : ""}>Bid Win Intensive</Link>
           <a href="/#software" onClick={handleSoftware}>Software</a>
           <Link href="/founder" className={isActive("/founder") ? "active" : ""}>Founder</Link>
-          <Link href="/brief" className={isActive("/brief") ? "active" : ""}>Newsletter</Link>
+          <a href="/brief" target="_blank" rel="noopener">Newsletter</a>
         </div>
 
         <div className="nav-cta">
@@ -59,7 +59,7 @@ export default function Nav() {
         <Link href="/bid-win-intensive" className={isActive("/bid-win-intensive") ? "active" : ""} onClick={closeDrawer}>Bid Win Intensive</Link>
         <a href="/#software" onClick={handleSoftware}>Software</a>
         <Link href="/founder" className={isActive("/founder") ? "active" : ""} onClick={closeDrawer}>Founder</Link>
-        <Link href="/brief" className={isActive("/brief") ? "active" : ""} onClick={closeDrawer}>Newsletter</Link>
+        <a href="/brief" target="_blank" rel="noopener" onClick={closeDrawer}>Newsletter</a>
         <div className="mctas">
           <a className="btn btn-ghost" style={{ borderColor: "rgba(255,255,255,.25)", color: "#fff" }} href="#" onClick={(e) => { e.preventDefault(); closeDrawer(); openModal("managed"); }}>Request a proposal</a>
           <a className="btn btn-orange" href="/#software" onClick={handleSoftware}>Start free trial</a>
