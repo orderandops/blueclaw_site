@@ -45,7 +45,7 @@
 <div class="bc-field"><label for="bc-phone">Phone</label><input id="bc-phone" name="phone" type="tel" autocomplete="tel" maxlength="50"></div>
 <div class="bc-field bc-field-wide"><label for="bc-company">Company name <span class="bc-required">*</span></label><input id="bc-company" name="company" autocomplete="organization" required maxlength="160"><span class="bc-field-error" id="bc-company-error" hidden></span></div>
 <div class="bc-field bc-field-wide"><label for="bc-message">What’s on your HR punch list? <span class="bc-required">*</span></label><textarea id="bc-message" name="message" rows="4" required maxlength="2500" placeholder="What’s happening, what you’d like help with, and your timeline…"></textarea><span class="bc-field-error" id="bc-message-error" hidden></span><span class="bc-field-help">A brief overview is plenty. Please leave out employee names and confidential personnel details.</span></div>
-</div><button class="bc-button bc-form-submit" type="submit">Review your inquiry <span aria-hidden="true">↗</span></button><p class="bc-form-note">Review your message, then open an email draft to send to Darcie.</p>
+</div><button class="bc-button bc-form-submit" type="submit">Send inquiry <span aria-hidden="true">↗</span></button><p class="bc-form-note">Submit your inquiry directly, or call Darcie at (704) 312-0385.</p>
 </form></div>
 <div class="bc-review-step" hidden><div class="bc-eyebrow">One more step</div><h2>READY TO TALK?</h2><p class="bc-modal-lede">Your inquiry is ready. Open it in your email app, then send it to Darcie.</p><dl class="bc-email-review"><dt>To</dt><dd>darcie@blueclaw.tech</dd><dt>Subject</dt><dd class="bc-review-subject"></dd></dl><div class="bc-email-body"></div><div class="bc-email-actions"><a class="bc-button bc-open-email" href="mailto:darcie@blueclaw.tech" target="_blank">Open email draft ↗</a><button type="button" class="bc-button bc-outline bc-edit-inquiry">Edit inquiry</button></div><p class="bc-modal-status" aria-live="polite">Your inquiry has not been sent.</p><button type="button" class="bc-modal-copy">Select message text</button></div>
 <div class="bc-modal-bottom"><p style="flex-basis:100%;font-size:12px"><strong>Darcie Gregoire · SPHR, SHRM-SCP</strong><br>Former U.S. DOL Wage &amp; Hour Investigator and HR Director</p><span>Call or text <a href="tel:+17043120385">(704) 312-0385</a></span><a href="https://calendly.com/blueclaw/30min" target="_blank" rel="noopener noreferrer">Schedule 30 minutes ↗</a></div>
@@ -213,4 +213,60 @@
 
 </script>
 </div>
-</body></html>
+<script>
+(()=>{
+  const root=document.getElementById('bc-hr');
+  const form=root.querySelector('#bc-inquiry-form');
+  const formStep=root.querySelector('.bc-form-step');
+  const resultStep=root.querySelector('.bc-review-step');
+  const submit=form.querySelector('[type="submit"]');
+  const modal=root.querySelector('.bc-modal');
+  const error=document.createElement('p');
+  error.className='bc-field-error';error.setAttribute('role','alert');error.hidden=true;
+  submit.before(error);
+  const trap=document.createElement('input');
+  trap.type='checkbox';trap.name='botcheck';trap.hidden=true;trap.setAttribute('aria-hidden','true');form.appendChild(trap);
+  let sending=false;
+  const labels={interest:'Choose the support you’re interested in.',first:'Please enter your first name.',last:'Please enter your last name.',email:'Please enter a valid email address.',company:'Please enter your company name.',message:'Please tell us a little about what you need.'};
+  function validate(){
+    let first=null;
+    Object.keys(labels).forEach(name=>{
+      const field=form.elements[name],message=root.querySelector('#'+field.id+'-error');
+      const invalid=!field.value.trim()||(name==='email'&&!field.validity.valid);
+      message.textContent=invalid?labels[name]:'';message.hidden=!invalid;message.setAttribute('role','alert');
+      if(invalid){field.setAttribute('aria-invalid','true');field.setAttribute('aria-describedby',message.id);if(!first)first=field;}
+      else{field.removeAttribute('aria-invalid');field.removeAttribute('aria-describedby');}
+    });
+    if(first)first.focus();return !first;
+  }
+  form.addEventListener('submit',async event=>{
+    event.preventDefault();event.stopImmediatePropagation();
+    if(sending||!validate())return;
+    if(trap.checked)return;
+    sending=true;submit.disabled=true;submit.textContent='Sending…';error.hidden=true;
+    const data=new FormData(form);
+    for(const pair of Array.from(data.entries()))if(typeof pair[1]==='string')data.set(pair[0],pair[1].trim());
+    data.set('access_key','5986a864-27bf-46e4-8351-fd4bd9fafcdb');
+    data.set('from_name','BlueClaw HR Website');
+    data.set('name',data.get('first')+' '+data.get('last'));
+    data.set('subject','BlueClaw HR inquiry: '+data.get('interest')+' — '+data.get('company'));
+    const abort=new AbortController();const timeout=setTimeout(()=>abort.abort(),20000);
+    try{
+      const response=await fetch('https://api.web3forms.com/submit',{method:'POST',body:data,headers:{Accept:'application/json'},signal:abort.signal});
+      const body=await response.json();
+      if(!response.ok||body.success!==true)throw new Error('Submission not accepted');
+      formStep.hidden=true;resultStep.hidden=false;
+      resultStep.innerHTML='<div class="bc-eyebrow">Inquiry received</div><h2 id="bc-sent-title">GOT IT.</h2><p class="bc-modal-lede">Thank you for reaching out. Your inquiry has been submitted successfully. Want to talk it through? Choose a time on Darcie’s calendar.</p><a class="bc-button" href="https://calendly.com/blueclaw/30min" target="_blank" rel="noopener noreferrer">Schedule 30 minutes ↗</a><p class="bc-modal-status">Darcie Gregoire · SPHR, SHRM-SCP<br>Former U.S. DOL Wage &amp; Hour Investigator and HR Director</p>';
+      modal.setAttribute('aria-labelledby','bc-sent-title');modal.removeAttribute('aria-describedby');
+      resultStep.querySelector('a').focus({preventScroll:true});modal.scrollIntoView({block:'start',behavior:'auto'});
+      form.reset();
+    }catch(failure){
+      error.textContent='We couldn’t confirm your inquiry was sent. Your message is still here. Please try again, email darcie@blueclaw.tech, or call (704) 312-0385.';
+      error.hidden=false;
+    }finally{
+      clearTimeout(timeout);sending=false;submit.disabled=false;submit.textContent='Send inquiry ↗';
+    }
+  },true);
+})();
+
+</script></body></html>
